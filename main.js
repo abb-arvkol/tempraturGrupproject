@@ -9,17 +9,19 @@ let database = firebase.database();
 
 
 
-database.ref("live/testRum").on("value", snap => {
-  temperature = snap.val()["temperature"];
+database.ref("live/rum1").on("value", snap => {
+  temperature = snap.val()["temp"];
   console.log(temperature);
-  humidity = snap.val()["humidity"];
+  humidity = snap.val()["hum"];
+
+  document.getElementById("temp1").innerHTML = `temperature:${temperature}℃`;
+  document.getElementById("hum1").innerHTML =`humidity:${humidity}`;
 
   if(count < 3) {
     count++;
   } else {
     count = 0;
   }
-    temperature = snap.val()["temperature"];
     console.log(temperature);
     ran = Math.random();
 
