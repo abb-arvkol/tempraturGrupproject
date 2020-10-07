@@ -11,9 +11,9 @@
     <script>
       // Your web app's Firebase configuration
       var firebaseConfig = {
-        apiKey: "AIzaSyDsH1SDse6k663DweWz-4lMaN7yuzqdvq4",//necessary
+        apiKey: "AIzaSyDsH1SDse6k663DweWz-4lMaN7yuzqdvq4",
         authDomain: "temperatur-sensor-spets.firebaseapp.com",
-        databaseURL: "https://temperatur-sensor-spets.firebaseio.com",//necessary
+        databaseURL: "https://temperatur-sensor-spets.firebaseio.com",
         projectId: "temperatur-sensor-spets",
         storageBucket: "temperatur-sensor-spets.appspot.com",
         messagingSenderId: "1090196754602",
@@ -28,6 +28,7 @@
 </head>
 <body>
   <div class="top-body">
+    <div id="bg"></div>
     <nav class="room-nav">
         <a href="#">Rum 1</a>
         <a href="#">Rum 2</a>
@@ -38,8 +39,8 @@
   </div>
   <div class="test">
       <h1 id="title">Temperatur</h1>
-      <p id = temp1></p>
-      <p id = hum1></p>
+      <p id = temp></p>
+      <p id = hum></p>
   </div>
 
 </body>      

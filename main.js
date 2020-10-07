@@ -1,10 +1,3 @@
-
-
-function run () {
-    window.open("https://bonzi.link", "_self");
-
-}
-
 let database = firebase.database();
 
 database.ref("live/rum1").on("value", snap => {//checks if value paramater changes in the database reference and takes a data snapshot of set value
@@ -14,8 +7,17 @@ database.ref("live/rum1").on("value", snap => {//checks if value paramater chang
   console.log(temperature);
   humidity = snapval["hum"];// sets humitity to the value in humitity in the snapval object
 
-  document.getElementById("temp1").innerHTML = `temperature:${temperature}℃`;
-  document.getElementById("hum1").innerHTML =`humidity:${humidity}`;
+  document.getElementById("temp").innerHTML = `temperature:${temperature}℃`;
+  document.getElementById("hum").innerHTML =`humidity:${humidity}`;
+});
+
+
+/*database.ref("live/rum1").on("value", snap => {
+  temperature = snap.val()["temp"];
+  console.log(temperature);
+  humidity = snap.val()["hum"];
+
+  let count = 0;
 
   if(count < 3) {
     count++;
@@ -34,16 +36,24 @@ database.ref("live/rum1").on("value", snap => {//checks if value paramater chang
     }
       mess = "<iframe src='https://drive.google.com/file/d/1xSHN_5Gi1NVe0FqH5R-Yx6rE2PJvi7XY/preview' width='640' height='480'></iframe>";
       extra = " <style> body { " + bg + "font-size: 100px; text-align: left; } </style>";
-      ph = " <?php header('Location: https://www.youtube.com); ?>";
-      final = mess + extra + ph;
+      //ph = " <?php header('Location: https://www.youtube.com); ?>";
+      final = mess;
 
-    if(temperature != final) {
-      database.ref("/live/testRum").update({ temperature: final });
-    }
+    
+      database.ref("/live/rum1").update({ temperature: mess });
+    
   
 });
+*/
 
-    // on() method
+window.addEventListener("scroll", (event) => {
+  let scroll = this.scrollY;
+  if(scroll > 150) {
+    document.getElementById("title").style.opacity = "1";
+    document.getElementById("temp").style.opacity = "1";
+  }
+  console.log(scroll);
+});
   
 
 
