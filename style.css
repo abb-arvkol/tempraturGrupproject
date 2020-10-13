@@ -85,6 +85,16 @@ p {
   transition: opacity 2s;
 }
 
+#temp {
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+#hum {
+  opacity: 0;
+  transition: opacity 2s;
+}
+
 #bg {
     position: absolute;
     margin: 0;
