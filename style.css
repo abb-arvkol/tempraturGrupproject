@@ -51,7 +51,7 @@ a:hover {
 
 .values {
   background-color: white;
-  height: 30vh;
+  height: 20vh;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -63,6 +63,7 @@ p {
 
 #title {
   font-family: 'Numans', sans-serif;
+  font-size: 50px;
   opacity: 0;
   transition: opacity 2s;
 }
@@ -94,8 +95,8 @@ p {
 
 #curve_chart {
   transform: translateX(-100vw);
-  height: 600px;
-  width: 80vw;
+  height: 800px;
+  width: 1500px;
   margin-left: auto;
   margin-right: auto;
   opacity: 0;

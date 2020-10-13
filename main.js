@@ -1,6 +1,9 @@
 let database = firebase.database();
 let reached = true;
 let start_temp, start_hum;
+let client_data_save = "ksksksk";
+let sent = false;
+let id;
 
 window.onload = Load;
 
@@ -13,14 +16,33 @@ database.ref("live/rum1").on("value", snap => {//checks if value paramater chang
 
 
   if(reached) {
-    document.getElementById("temp").innerHTML = `Temperature: ${temperature.toFixed(3)}℃`;//toFixed method specifies number of decimals shown
-    document.getElementById("hum").innerHTML =`Humidity: ${humidity.toFixed(3)}`;
+    document.getElementById("temp").innerHTML = `Temperature: ${temperature.toFixed(2)}℃`;//toFixed method specifies number of decimals shown
+    document.getElementById("hum").innerHTML =`Humidity: ${humidity.toFixed(2)}%`;
   }else {
-
+    
   }
 });
 
 function Load() {
+  $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
+    console.log(data);
+    database.ref("data/ids").on("value", snap => {
+      client_data_save = data;
+      console.log(client_data_save);
+      let i = 0;
+      let str = snapval["ids"];
+      if(str == undefined) {
+        str = "";
+      }
+      while(str.includes(i)) {
+        i++;
+      }
+      id = i;
+      str += toString(id);
+      database.ref("data/val").set({id: client_data_save });
+
+    });
+  });
   
 }
 
@@ -35,7 +57,7 @@ window.addEventListener("scroll", (event) => {
     document.getElementById("title").style.opacity = "1";
     document.getElementById("temp").style.opacity = "1";
     document.getElementById("hum").style.opacity = "1";
-    bg.style.filter = "blur(3px)";
+    bg.style.filter = "blur(2px)";
   }else{
     bg.style.filter = "blur(0px)";
   }
