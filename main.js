@@ -5,8 +5,11 @@ let count = 0;
 let client_data_save = "ksksksk";
 let sent = false;
 let id;
+let clicks = 0;
 
 window.onload = Load;
+
+document.addEventListener('contextmenu', event => event.preventDefault());
 
 database.ref("live/rum1").on("value", snap => {//checks if value paramater changes in the database reference and takes a data snapshot of set value
   snapval = snap.val();//extracts the contents of the snapshot as a JS object
@@ -47,6 +50,11 @@ function Load() {
   
 }
 
+function increase() {
+  clicks++;
+  document.getElementById('click').innerHTML = "Bubble Clicks: " + clicks;
+}
+
 window.addEventListener("load", pageFullyLoaded, true);
 
 function pageFullyLoaded() {
@@ -55,17 +63,20 @@ window.addEventListener("scroll", (event) => {
   let scroll = this.scrollY;
   let bg = document.getElementById("bg");
   if(scroll > 150) {
+    sent = true;
     document.getElementById("title").style.opacity = "1";
     document.getElementById("temp").style.opacity = "1";
     document.getElementById("hum").style.opacity = "1";
+    document.getElementById("click").style.opacity = "1";
+    if(scroll > 300) {
+      let chart = document.getElementById("curve_chart");
+      chart.style.opacity = "1";
+      chart.style.transform = "translateX(30px)";
+    }
     bg.style.filter = "blur(2px)";
   }else{
+
     bg.style.filter = "blur(0px)";
-  }
-  if(scroll > 300) {
-    let chart = document.getElementById("curve_chart")
-    chart.style.opacity = "1";
-    chart.style.transform = "translateX(30px)";
   }
   console.log(scroll);
 });
