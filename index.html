@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +7,31 @@
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  1000,      400],
+          ['2005',  1170,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540]
+        ]);
+
+        var options = {
+          title: 'Temperature and Humidity',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
     <script>
       // Your web app's Firebase configuration
       var firebaseConfig = {
@@ -29,19 +53,13 @@
 <body>
   <div class="top-body">
     <div id="bg"></div>
-    <nav class="room-nav">
-        <a href="#">Rum 1</a>
-        <a href="#">Rum 2</a>
-        <a href="#">Rum 3</a>
-        <a href="#">Rum 4</a>
-        <a href="#">Rum 5</a>
-    </nav>
   </div>
-  <div class="test">
-      <h1 id="title">Temperatur</h1>
-      <p id = "temp"></p>
-      <p id = "hum"></p>
+  <div class="values">
+      <h1 id="title">Rum x</h1>
+      <p id="temp"></p>
+      <p id="hum"></p>
   </div>
-
+  <div id="curve_chart"></div>
+  
 </body>      
 	

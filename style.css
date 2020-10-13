@@ -10,19 +10,6 @@ body {
     backdrop-filter: blur(5px);
     text-align: justify;
 }
-.room-nav {
-  transform: translateY(10px);
-  text-align: center;
-  width: 50vw; 
-  height: 5vh;
-  background-color: rgb(260, 260, 260);
-  border: 2px; 
-  box-shadow: 1px 1px 1px rgb(0, 0, 0);
-  border-radius: 20px;
-  margin-left: auto;
-  margin-right: auto;
-
-}
 
 .top-body {
   margin: 0;
@@ -62,9 +49,9 @@ a:hover {
 
 
 
-.test {
+.values {
   background-color: white;
-  height: 100vh;
+  height: 30vh;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -76,11 +63,6 @@ p {
 
 #title {
   font-family: 'Numans', sans-serif;
-  opacity: 0;
-  transition: opacity 2s;
-}
-
-#temp {
   opacity: 0;
   transition: opacity 2s;
 }
@@ -106,6 +88,17 @@ p {
     background-size: 100%;
     background-attachment: fixed;
     background-color: white;
-    filter: blur(1px);
+    filter: blur(0px);
+    transition: filter 0.7s;
+}
+
+#curve_chart {
+  transform: translateX(-100vw);
+  height: 600px;
+  width: 80vw;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  transition: opacity 4s, transform 2s;
 }
 
