@@ -1,6 +1,7 @@
 let database = firebase.database();
 let reached = true;
 let start_temp, start_hum;
+let count = 0;
 let client_data_save = "ksksksk";
 let sent = false;
 let id;
@@ -69,7 +70,23 @@ window.addEventListener("scroll", (event) => {
   console.log(scroll);
 });
 
+setTimeout(function() {
+  moveBubbles();
+}, 20);
+
+setInterval(function() {
+    moveBubbles();
+
+}, 2000);
+
+function moveBubbles() {
+  let objects = document.getElementsByClassName("bubbles");
+  for(var i=0; i<objects.length; i++) {
+      let randomx = Math.random()*100;
+      let randomy = Math.random()*100;
+      objects[i].style.transform = "translate(" + randomx.toString() + "px, " + randomy.toString() + "px)";
+  }
 }
   
 
-
+}
