@@ -1,14 +1,31 @@
-
-
-
-
-
-window.addEventListener('scroll', function () {
-  document.getElementById("title").style.opacity = 1;
-
-});
-
 let database = firebase.database();
+
+<<<<<<< HEAD
+
+/*database.ref("live/rum1").on("value", snap => {
+  temperature = snap.val()["temp"];
+  console.log(temperature);
+  humidity = snap.val()["hum"];
+
+  let count = 0;
+=======
+>>>>>>> d13f903af55be4498aba48fc8f0b1eb2db5971d7
+database.ref("live/rum1").on("value", snap => {//checks if value paramater changes in the database reference and takes a data snapshot of set value
+  snapval = snap.val();//extracts the contents of the snapshot as a JS object
+  
+  temperature = snapval["temp"];//sets temp to the value in temperature in the snapval object
+  console.log(temperature);
+  humidity = snapval["hum"];// sets humitity to the value in humitity in the snapval object
+
+<<<<<<< HEAD
+  document.getElementById("temp1").innerHTML = `temperature:${temperature}℃`;
+  document.getElementById("hum1").innerHTML =`humidity:${humidity}`;
+
+
+=======
+  document.getElementById("temp").innerHTML = `temperature:${temperature}℃`;
+  document.getElementById("hum").innerHTML =`humidity:${humidity}`;
+});
 
 
 /*database.ref("live/rum1").on("value", snap => {
@@ -17,17 +34,8 @@ let database = firebase.database();
   humidity = snap.val()["hum"];
 
   let count = 0;
-database.ref("live/rum1").on("value", snap => {//checks if value paramater changes in the database reference and takes a data snapshot of set value
-  snapval = snap.val();//extracts the contents of the snapshot as a JS object
-  
-  temperature = snapval["temp"];//sets temp to the value in temperature in the snapval object
-  console.log(temperature);
-  humidity = snapval["hum"];// sets humitity to the value in humitity in the snapval object
 
-  document.getElementById("temp1").innerHTML = `temperature:${temperature}℃`;
-  document.getElementById("hum1").innerHTML =`humidity:${humidity}`;
-
-
+>>>>>>> d13f903af55be4498aba48fc8f0b1eb2db5971d7
   if(count < 3) {
     count++;
   } else {
@@ -63,8 +71,6 @@ window.addEventListener("scroll", (event) => {
   }
   console.log(scroll);
 });
-
-    // on() method
   
 
 
