@@ -4,6 +4,13 @@ html {
 }
 
 body {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently*/
+            -o-user-select: none;
     background-color:white;
     margin: 0px;
     padding: 0px;
@@ -51,7 +58,7 @@ a:hover {
 
 .values {
   background-color: white;
-  height: 30vh;
+  height: 20vh;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -63,6 +70,7 @@ p {
 
 #title {
   font-family: 'Numans', sans-serif;
+  font-size: 50px;
   opacity: 0;
   transition: opacity 2s;
 }
@@ -73,6 +81,11 @@ p {
 }
 
 #hum {
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+#click {
   opacity: 0;
   transition: opacity 2s;
 }
@@ -92,10 +105,35 @@ p {
     transition: filter 0.7s;
 }
 
+.bubbles {
+    width: 15%;
+    margin-top: 8%;
+    margin-left: 2%;
+    margin-right: 2.5%;
+    opacity: 0.7;
+    transform: translate(0px, 0px);
+    transition: transform 4s linear, width 1s;
+}
+
+.bubbles-container {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bubbles:hover {
+    opacity: 0.9;
+    
+}
+
+.bubbles:active {
+  width: 14%;
+}
+
 #curve_chart {
   transform: translateX(-100vw);
-  height: 600px;
-  width: 80vw;
+  height: 800px;
+  width: 1500px;
   margin-left: auto;
   margin-right: auto;
   opacity: 0;
