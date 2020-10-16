@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kurale&family=Montserrat+Alternates&family=Numans&family=Public+Sans:wght@500&family=Trocchi&display=swap');
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -75,12 +76,12 @@ p {
   transition: opacity 2s;
 }
 
-#temp {
+#current-temp {
   opacity: 0;
   transition: opacity 2s;
 }
 
-#hum {
+#current-hum {
   opacity: 0;
   transition: opacity 2s;
 }
@@ -128,12 +129,13 @@ p {
 
 .bubbles:active {
   width: 14%;
+  filter: contrast(90%);
 }
 
 #curve_chart {
   transform: translateX(-100vw);
   height: 800px;
-  width: 1500px;
+  width: 1200px;
   margin-left: auto;
   margin-right: auto;
   opacity: 0;

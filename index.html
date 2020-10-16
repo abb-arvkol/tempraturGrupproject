@@ -6,6 +6,7 @@
     <title>Temperaturer</title>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="cookie.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -25,7 +26,8 @@
         var options = {
           title: 'Temperature and Humidity',
           curveType: 'function',
-          legend: { position: 'bottom' }
+          legend: { position: 'bottom' },
+          backgroundColor: {fill: 'transparent'}
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
@@ -55,17 +57,17 @@
   <div class="top-body">
     <div id="bg"></div>
     <div class="bubbles-container">
-    <img class="bubbles" draggable="false" onclick="increase()" src="bubble.png">
-    <img class="bubbles" draggable="false" onclick="increase()" src="bubble.png">
-    <img class="bubbles" draggable="false" onclick="increase()" src="bubble.png">
-    <img class="bubbles" draggable="false" onclick="increase()" src="bubble.png">
-    <img class="bubbles" draggable="false" onclick="increase()" src="bubble.png">
+    <img class="bubbles" draggable="false" onclick="increase(0)" src="bubble.png">
+    <img class="bubbles" draggable="false" onclick="increase(1)" src="bubble.png">
+    <img class="bubbles" draggable="false" onclick="increase(2)" src="bubble.png">
+    <img class="bubbles" draggable="false" onclick="increase(3)" src="bubble.png">
+    <img class="bubbles" draggable="false" onclick="increase(4)" src="bubble.png">
     </div>
   </div>
   <div class="values">
       <h1 id="title">Rum x</h1>
-      <p id="temp"></p>
-      <p id="hum"></p>
+      <p id="current-temp"></p>
+      <p id="current-hum"></p>
       <p id="click">Bubble clicks: 0</p>
   </div>
   <div id="curve_chart"></div>

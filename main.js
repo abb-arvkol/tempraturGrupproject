@@ -1,33 +1,48 @@
 let database = firebase.database();
 let reached = true;
 let start_temp, start_hum;
-let count = 0;
 let client_data_save = "ksksksk";
 let sent = false;
-let id;
+let id, count;
 let clicks = 0;
+let rooms = ["Klassrummet",
+             "Växthuset",
+             "Pingisrummet",
+             "Teknikrum",
+             "Sistrum"];
+let room = rooms[0];
 
 window.onload = Load;
 
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-database.ref("live/rum1").on("value", snap => {//checks if value paramater changes in the database reference and takes a data snapshot of set value
-  snapval = snap.val();//extracts the contents of the snapshot as a JS object
-  
-  temperature = snapval["temp"];//sets temp to the value in temperature in the snapval object
-  console.log(temperature);
-  humidity = snapval["hum"];// sets humitity to the value in humitity in the snapval object
+function updateLiveValue(rum, values) {
+  temperature = values[`rum${rum}`]["temp"];
+  humidity = values[`rum${rum}`]["hum"];
+ 
+  temperature = temperature.toFixed(2);
+  humidity = humidity.toFixed(2);
 
+  console.log(rooms.indexOf(room)+1);
+ 
+  //document.getElementById(`temp${rum}`).innerHTML = temperature + "C";
+  //document.getElementById(`hum${rum}`).innerHTML = humidity + "%";
 
-  if(reached) {
-    document.getElementById("temp").innerHTML = `Temperature: ${temperature.toFixed(2)}℃`;//toFixed method specifies number of decimals shown
-    document.getElementById("hum").innerHTML =`Humidity: ${humidity.toFixed(2)}%`;
-  }else {
-    
+  if(rum == rooms.indexOf(room)+1) {
+    document.getElementById('current-temp').innerHTML = temperature + "C";
+    document.getElementById('current-hum').innerHTML = humidity + "%";
+  }
+
+}
+ 
+database.ref("live/").on("value", snap => {
+  for (let i = 1; i < 6; i++) {
+    updateLiveValue(i, snap.val()); // change tha last parameter for decimals
   }
 });
 
 function Load() {
+  newRoom();
   $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
     console.log(data);
     database.ref("data/ids").on("value", snap => {
@@ -50,9 +65,18 @@ function Load() {
   
 }
 
-function increase() {
+function increase(bubble) {
   clicks++;
   document.getElementById('click').innerHTML = "Bubble Clicks: " + clicks;
+  room = rooms[bubble];
+  newRoom();
+}
+
+function newRoom() {
+  let title = document.getElementById("title");
+  console.log(room);
+  if(title.innerHTML == room) return;
+  title.innerHTML = room;
 }
 
 window.addEventListener("load", pageFullyLoaded, true);
@@ -65,8 +89,8 @@ window.addEventListener("scroll", (event) => {
   if(scroll > 150) {
     sent = true;
     document.getElementById("title").style.opacity = "1";
-    document.getElementById("temp").style.opacity = "1";
-    document.getElementById("hum").style.opacity = "1";
+    document.getElementById("current-temp").style.opacity = "1";
+    document.getElementById("current-hum").style.opacity = "1";
     document.getElementById("click").style.opacity = "1";
     if(scroll > 300) {
       let chart = document.getElementById("curve_chart");
@@ -98,6 +122,14 @@ function moveBubbles() {
       objects[i].style.transform = "translate(" + randomx.toString() + "px, " + randomy.toString() + "px)";
   }
 }
+
+document.getElementById('check').onclick = function() {
+  if(this.checked) {
+    $("html").css('filter', 'invert(100%)');
+  }else {
+    $("html").css('filter', 'invert(0%)');
+  }
+};
   
 
 }
