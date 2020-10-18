@@ -41,8 +41,8 @@ function updateLiveValue(rum, values) {
 
   console.log("hejeh" + rooms.indexOf(room)+1);
  
-  document.getElementById(`temp${rum}`).innerHTML = temperature + "C";
-  document.getElementById(`hum${rum}`).innerHTML = humidity + "%";
+  // document.getElementById(`temp${rum}`).innerHTML = temperature + "C";
+  // document.getElementById(`hum${rum}`).innerHTML = humidity + "%";
   
   if(rum == rooms.indexOf(room, 0)+1) {
     document.getElementById('current-temp').innerHTML = temperature + "C";
@@ -53,8 +53,10 @@ function updateLiveValue(rum, values) {
 }
  
 database.ref("live/").on("value", snap => {
-  for(let i=1; i<)
-  updateLiveValue(rooms.indexOf(room)+1, ); // change tha last parameter for decimals
+  livesnap = snap.val();
+  for(var i = 1; i < 6; i++){
+   updateLiveValue(i, livesnap); 
+  }
 });
 
 // database.ref("long/").on("value", snap => {
@@ -106,7 +108,7 @@ function newRoom() {
   let title = document.getElementById("title");
   console.log(room);
   if(title.innerHTML == room) return;
-  title.innerHTML = "snatch";
+  title.innerHTML = room;
 }
 
 window.addEventListener("load", pageFullyLoaded, true);
