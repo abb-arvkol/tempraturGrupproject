@@ -10,7 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
@@ -22,7 +22,6 @@
           ['2006',  660,       1120],
           ['2007',  1030,      540]
         ]);
-
         var options = {
           title: 'Temperature and Humidity',
           curveType: 'function',
@@ -34,7 +33,7 @@
 
         chart.draw(data, options);
       }
-    </script>
+    </script> -->
     <script>
       // Your web app's Firebase configuration
       var firebaseConfig = {
@@ -83,7 +82,7 @@
       <p id="current-hum"></p>
       <p id="click">Bubble clicks: 0</p>
   </div>
-  <div id="curve_chart"></div>
-  
+  <div id="chart_div"></div>
+  <div id="monthchart_div"></div>
 </body>      
 	

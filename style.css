@@ -139,7 +139,7 @@ p {
   filter: contrast(90%);
 }
 
-#curve_chart {
+#chart_div, #monthchart_div{
   transform: translateX(-100vw);
   height: 800px;
   width: 1200px;
@@ -151,17 +151,17 @@ p {
 
 #bubble {
   position: fixed;
-  right: 900px;
-  top: 500px;
-  width: 30%;
+  right: 800px;
+  top: 1100px;
+  width: 25%;
   opacity: 0.3;
 }
 
 #bubble1 {
   position: fixed;
-  right: 900px;
-  top: 500px;
-  width: 30%;
+  right: 200px;
+  top: 1500px;
+  width: 20%;
   opacity: 0.3;
 }
 
