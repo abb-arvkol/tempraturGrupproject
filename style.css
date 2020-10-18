@@ -96,7 +96,7 @@ p {
     margin: 0;
     padding: 0;
     height: 70vh;
-    width: 100vw;
+    width: 120vw;
     background-image: url('mansion.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
@@ -107,13 +107,20 @@ p {
 }
 
 .bubbles {
-    width: 15%;
-    margin-top: 8%;
-    margin-left: 2%;
-    margin-right: 2.5%;
-    opacity: 0.7;
-    transform: translate(0px, 0px);
-    transition: transform 4s linear, width 1s;
+  width: 200px;
+  margin-top: 0%;
+  margin-left: 20%;
+  margin-right: 2.5%;
+  opacity: 0.7;
+}
+
+.con {
+  display: inline-block;
+  margin-left: 2%;
+  margin-right: 2%;
+  transform: translate(0px, 0px);
+  transition: transform 4s linear, width 1s;
+
 }
 
 .bubbles-container {
@@ -128,7 +135,7 @@ p {
 }
 
 .bubbles:active {
-  width: 14%;
+  width: 180px;
   filter: contrast(90%);
 }
 
@@ -141,4 +148,37 @@ p {
   opacity: 0;
   transition: opacity 4s, transform 2s;
 }
+
+#bubble {
+  position: fixed;
+  right: 900px;
+  top: 500px;
+  width: 30%;
+  opacity: 0.3;
+}
+
+#bubble1 {
+  position: fixed;
+  right: 900px;
+  top: 500px;
+  width: 30%;
+  opacity: 0.3;
+}
+
+#bubble2 {
+  position: fixed;
+  right: -50px;
+  top: 700px;
+  width: 40%;
+  opacity: 0.2;
+}
+
+#bubble3 {
+  position: fixed;
+  right: 900px;
+  top: 500px;
+  width: 30%;
+  opacity: 0.3;
+}
+
 

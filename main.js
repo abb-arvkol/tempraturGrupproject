@@ -23,12 +23,12 @@ function updateLiveValue(rum, values) {
   temperature = temperature.toFixed(2);
   humidity = humidity.toFixed(2);
 
-  console.log(rooms.indexOf(room)+1);
+  console.log("hejeh" + rooms.indexOf(room)+1);
  
-  //document.getElementById(`temp${rum}`).innerHTML = temperature + "C";
-  //document.getElementById(`hum${rum}`).innerHTML = humidity + "%";
+  document.getElementById(`temp${rum}`).innerHTML = temperature + "C";
+  document.getElementById(`hum${rum}`).innerHTML = humidity + "%";
 
-  if(rum == rooms.indexOf(room)+1) {
+  if(rum == rooms.indexOf(room, 0)+1) {
     document.getElementById('current-temp').innerHTML = temperature + "C";
     document.getElementById('current-hum').innerHTML = humidity + "%";
   }
@@ -45,7 +45,6 @@ function Load() {
   newRoom();
   $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
     console.log(data);
-    database.ref("data/ids").on("value", snap => {
       client_data_save = data;
       console.log(client_data_save);
       let i = 0;
@@ -57,15 +56,16 @@ function Load() {
         i++;
       }
       id = i;
+      console.log("id" + id);
       str += toString(id);
-      database.ref("data/val").set({id: client_data_save });
-
-    });
+      database.ref("data/val/id/"+toString(id)).set({id: client_data_save });
   });
   
 }
 
 function increase(bubble) {
+  let snd = new Audio("plop-effect.mp3")
+  snd.play();
   clicks++;
   document.getElementById('click').innerHTML = "Bubble Clicks: " + clicks;
   room = rooms[bubble];
@@ -115,7 +115,7 @@ setInterval(function() {
 }, 2000);
 
 function moveBubbles() {
-  let objects = document.getElementsByClassName("bubbles");
+  let objects = document.getElementsByClassName("con");
   for(var i=0; i<objects.length; i++) {
       let randomx = Math.random()*100;
       let randomy = Math.random()*100;
