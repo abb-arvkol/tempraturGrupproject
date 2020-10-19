@@ -53,8 +53,9 @@ function updateLiveValue(rum, values) {
 }
  
 database.ref("live/").on("value", snap => {
-  for(let i=1; i<)
-  updateLiveValue(rooms.indexOf(room)+1, ); // change tha last parameter for decimals
+  for(let i=1; i<6; i++) {
+    updateLiveValue(rooms.indexOf(room)+1, i); // change tha last parameter for decimals
+  }
 });
 
 // database.ref("long/").on("value", snap => {

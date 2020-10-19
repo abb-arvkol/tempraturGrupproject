@@ -107,10 +107,11 @@ p {
 }
 
 .bubbles {
-  width: 200px;
+  width: 15vw;
   margin-top: 0%;
   margin-left: 20%;
   margin-right: 2.5%;
+  transition: width 0.05s;
   opacity: 0.7;
 }
 
@@ -135,7 +136,7 @@ p {
 }
 
 .bubbles:active {
-  width: 180px;
+  width: 14vw;
   filter: contrast(90%);
 }
 
@@ -151,34 +152,34 @@ p {
 
 #bubble {
   position: fixed;
-  right: 800px;
-  top: 1100px;
+  right: 80vw;
+  top: 130vh;
   width: 25%;
-  opacity: 0.3;
+  opacity: 0.2;
 }
 
 #bubble1 {
   position: fixed;
-  right: 200px;
-  top: 1500px;
+  right: 30vw;
+  top: 80vh;
   width: 20%;
-  opacity: 0.3;
+  opacity: 0.15;
 }
 
 #bubble2 {
   position: fixed;
-  right: -50px;
-  top: 700px;
+  right: -5vw;
+  top: 120vh;
   width: 40%;
-  opacity: 0.2;
+  opacity: 0.1;
 }
 
 #bubble3 {
   position: fixed;
-  right: 900px;
-  top: 500px;
+  right: 65vw;
+  top: 80vh;
   width: 30%;
-  opacity: 0.3;
+  opacity: 0.2;
 }
 
 
