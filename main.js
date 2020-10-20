@@ -15,9 +15,14 @@ let room = rooms[0];
 
 let hours = [];
 let days = [];
-var moptions;
+var options,
+    moptions;
 let long,
     long1;
+let dayAmount = 0,
+    dateAmount = 0;
+
+var currDate = new Date(); 
 
 window.onload = Load;
 
@@ -173,125 +178,131 @@ document.getElementById('check').onclick = function() {
 
 google.charts.load('current', {packages: ['corechart', 'line']});
 google.charts.setOnLoadCallback(drawCurveTypes);
-
+try{
 var daydata = new google.visualization.DataTable();
 var monthdata = new google.visualization.DataTable();
-
+}catch{}
 function drawCurveTypes() {
-      database.ref("day/").on("value", snap => {
-        daydata = new google.visualization.DataTable();
-        daydata.addColumn('number', 'X');
-        daydata.addColumn('number', 'rum1');
-        daydata.addColumn('number', 'rum2');
-        daydata.addColumn('number', 'rum3');
-        daydata.addColumn('number', 'rum4');
-        daydata.addColumn('number', 'rum5');
-        
-        long = snap.val();
+  database.ref("day/").on("value", snap => {
+    daydata = new google.visualization.DataTable();
+    daydata.addColumn('string', 'X');
+    daydata.addColumn('number', 'rum1');
+    daydata.addColumn('number', 'rum2');
+    daydata.addColumn('number', 'rum3');
+    daydata.addColumn('number', 'rum4');
+    daydata.addColumn('number', 'rum5');
+    
+    long = snap.val();
 
-         console.log("-----------------------------------------------------");
+     console.log("-----------------------------------------------------");
+     for (const i in long) {
+       let keys = Object.keys(long[i]);
+       dateAmount = 0;
+       if (keys.length > dateAmount) {
+         dateAmount = keys.length;
+         hours = keys;
+       }
+       if(keys.length > currDate.getHours())
+       {
+         dateAmount = currDate.getHours();//getHours returns hour value from 0-23
+       }
+    }
+    for(var j = 23; j > dateAmount; j--)
+    {
+      daydata.addRows([[String(hours[j]), long["rum1"][hours[j]]["temp"],long["rum2"][hours[j]]["temp"],long["rum3"][hours[j]]["temp"],long["rum4"][hours[j]]["temp"],long["rum5"][hours[j]]["temp"]]]);
+    }
+    for(var k = 0; k <= dateAmount; k++)
+    {
+      daydata.addRows([[String(hours[k]), long["rum1"][hours[k]]["temp"],long["rum2"][hours[k]]["temp"],long["rum3"][hours[k]]["temp"],long["rum4"][hours[k]]["temp"],long["rum5"][hours[k]]["temp"]]]);
+    }
 
-         let dateAmount = 0;
-         for (const i in long) {
-           let keys = Object.keys(long[i]);
+    options = {
+      curveType: 'function',
+      hAxis: {
+        title: 'Hour',
+        //gridlines:{count: 24},
+      },
+      vAxis: {
+        title: 'Temperature'
+      },
+      // chartArea: {
+      //   left:100, top:100
+      // },
+      legend: { 
+        position: 'bottom' //sets chart position
+      },
+      backgroundColor: {
+        fill: 'transparent'
+      }
+      
+    };
 
-           if (keys.length > dateAmount) {
-             dateAmount = keys.length;
-             hours = keys;
-           }
-        }
-        for(var k in hours)
-        {
-          daydata.addRows([[parseInt(hours[k]), long["rum1"][hours[k]]["temp"],long["rum2"][hours[k]]["temp"],long["rum3"][hours[k]]["temp"],long["rum4"][hours[k]]["temp"],long["rum5"][hours[k]]["temp"]]]);
-        }
-        drawnow();
-        console.log(hours);
+    drawnow();
+    console.log(hours);
+  });
 
-      });
-      var options = {
-        hAxis: {
-          title: 'Hour',
-          gridlines:{count:24},
+  database.ref("mon/").on("value", snap => {
+
+    monthdata = new google.visualization.DataTable();
+    monthdata.addColumn('number', 'X');
+    monthdata.addColumn('number', 'rum1');
+    monthdata.addColumn('number', 'rum2');
+    monthdata.addColumn('number', 'rum3');
+    monthdata.addColumn('number', 'rum4');
+    monthdata.addColumn('number', 'rum5');
+
+    long1 = snap.val();
+
+    console.log("-----------------------------------------------------");
+
+    for (const i in long1) {
+      let mkeys = Object.keys(long1[i]);
+      dayAmount = 0;
+     if (mkeys.length > dayAmount) {
+       dayAmount = mkeys.length;
+       days = mkeys;
+     }
+     if(mkeys.length > currDate.getDate())
+     {
+       dayAmount = currDate.getDate();
+     }
+    }
+    for(var k = 0; k < dayAmount; k++)
+    {
+      monthdata.addRows([[parseInt(days[k]), long1["rum1"][days[k]]["temp"],long1["rum2"][days[k]]["temp"],long1["rum3"][days[k]]["temp"],long1["rum4"][days[k]]["temp"],long1["rum5"][days[k]]["temp"]]]);
+    }
+    moptions = {
+      curveType: 'function',
+      hAxis: {
+        title: 'Day',
+        gridlines:{
+          count: dayAmount,
+          color: 'transparent'
         },
-        vAxis: {
-          title: 'Temperature'
-        },
-        // chartArea: {
-        //   left:100, top:100
-        // },
-        series: {
-          //1: {curveType: 'function'}
-        },
-        legend: { 
-          position: 'bottom' //sets chart position
-        },
-        backgroundColor: {
-          fill: 'transparent'
-        }
-        
-      };
+      },
+      vAxis: {
+        title: 'Temperature'
+      },
+      // chartArea: {
+      //   left:100, top:100
+      // },
+      legend: {
+        position: 'bottom'
+      },
+      backgroundColor: {
+        fill: 'transparent'
+      }
+    };
 
-     
+    drawnow();
+    console.log(days);
 
+  });
 
-      database.ref("mon/").on("value", snap => {
-
-        monthdata = new google.visualization.DataTable();
-        monthdata.addColumn('number', 'X');
-        monthdata.addColumn('number', 'rum1');
-        monthdata.addColumn('number', 'rum2');
-        monthdata.addColumn('number', 'rum3');
-        monthdata.addColumn('number', 'rum4');
-        monthdata.addColumn('number', 'rum5');
-
-        long1 = snap.val();
-
-        console.log("-----------------------------------------------------");
-
-        let monthAmount = 0;
-        for (const i in long1) {
-          let mkeys = Object.keys(long1[i]);
-
-         if (mkeys.length > monthAmount) {
-           monthAmount = mkeys.length;
-           days = mkeys;
-         }
-        }
-        for(var k in days)
-        {
-          monthdata.addRows([[parseInt(days[k]), long1["rum1"][days[k]]["temp"],long1["rum2"][days[k]]["temp"],long1["rum3"][days[k]]["temp"],long1["rum4"][days[k]]["temp"],long1["rum5"][days[k]]["temp"]]]);
-        }
-        moptions = {
-          hAxis: {
-            title: 'Day',
-            gridlines:{count: days.length},
-          },
-          vAxis: {
-            title: 'Temperature'
-          },
-          // chartArea: {
-          //   left:100, top:100
-          // },
-          series: {
-            //1: {curveType: 'function'}
-          },
-          legend: {
-            position: 'bottom'
-          },
-          backgroundColor: {
-            fill: 'transparent'
-          }
-        };
-
-        drawnow();
-        console.log(days);
-
-      });
-
-    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-    var monthchart = new google.visualization.LineChart(document.getElementById('monthchart_div'));
-    function drawnow(){
-      chart.draw(daydata, options);
-      monthchart.draw(monthdata,moptions);
-   }
+var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+var monthchart = new google.visualization.LineChart(document.getElementById('monthchart_div'));
+function drawnow(){
+  chart.draw(daydata, options);
+  monthchart.draw(monthdata,moptions);
+}
 }

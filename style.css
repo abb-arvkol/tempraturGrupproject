@@ -116,7 +116,7 @@ p {
 
 .con {
   display: inline-block;
-  margin-left: 2%;
+  margin-left: 5%;
   margin-right: 2%;
   transform: translate(0px, 0px);
   transition: transform 4s linear, width 1s;
