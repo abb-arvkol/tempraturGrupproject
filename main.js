@@ -23,7 +23,7 @@ let long, long1;
 let dayAmount = 0,
   dateAmount = 0;
 
-let grafCurveType = "function"
+let grafCurveType = "function";
 
 var currDate = new Date();
 
@@ -45,14 +45,10 @@ function updateLiveValue(rum, values) {
   if (rum == rooms.indexOf(room, 0) + 1) {
     document.getElementById("current-temp").innerHTML = temperature + "°C";
     document.getElementById("current-hum").innerHTML = humidity + "%";
-
-    document.getElementById("rum" + rum.toString()).innerHTML =
-      temperature + "°C";
   }
   document.getElementById("rum" + rum.toString()).innerHTML =
     temperature + "°C";
 }
-
 //listens to the database for value chcanges within the live node (which contains the live valuse of each room)
 //once a value is updated, it will loop through 1 to 5 sending both the iteration index and the values that have been
 //retrieved as parameters through the function updateLiveValue. that function will then show the new value on the website.
@@ -148,63 +144,58 @@ function pageFullyLoaded() {
         "translate(" + randomx.toString() + "px, " + randomy.toString() + "px)";
     }
   }
-
-  document.getElementById("check").onclick = function () {
-    if (this.checked) {
-      $("html").css("filter", "invert(100%)");
-    } else {
-      $("html").css("filter", "invert(0%)");
-    }
-  };
 }
 
 //adding google charts
-
-google.charts.load("current", { packages: ["corechart", "line"] });
-google.charts.setOnLoadCallback(drawCurveTypes);
+google.charts.load("current", { packages: ["corechart", "line"] }); //loads google chart library
+google.charts.setOnLoadCallback(drawCurveTypes); //runs a function when loaded
 try {
+  //create datatable variables
   var daydata = new google.visualization.DataTable();
   var monthdata = new google.visualization.DataTable();
 } catch {}
 function drawCurveTypes() {
+  //detects changes to the database inside the "day" node
   database.ref("day/").on("value", (snap) => {
     long = snap.val();
-
     daydataGraphing();
   });
-
+  //detects changes to the database inside the "mon" node
   database.ref("mon/").on("value", (snap) => {
     long1 = snap.val();
     monthdataGraphing();
   });
 
+  //creating line chart objects
   chart = new google.visualization.LineChart(
     document.getElementById("chart_div")
   );
   monthchart = new google.visualization.LineChart(
     document.getElementById("monthchart_div")
   );
-  
+  //------------------
 }
-
+//function for displaying charts/grafs
 function drawnow() {
   chart.draw(daydata, options);
   monthchart.draw(monthdata, moptions);
 }
 
-function monthdataGraphing(){
+//adds necessary data for month-graf to be drawn
+function monthdataGraphing() {
   monthdata = new google.visualization.DataTable();
   monthdata.addColumn("number", "X");
-  monthdata.addColumn("number", "rum1");
-  monthdata.addColumn("number", "rum2");
-  monthdata.addColumn("number", "rum3");
-  monthdata.addColumn("number", "rum4");
-  monthdata.addColumn("number", "rum5");
+  monthdata.addColumn("number", "Kabelrummet");
+  monthdata.addColumn("number", "Kafeterian");
+  monthdata.addColumn("number", "Pingisrummet");
+  monthdata.addColumn("number", "Personalrummet");
+  monthdata.addColumn("number", "Tekniklabbet");
 
   console.log("-----------------------------------------------------");
 
   for (const i in long1) {
-    let mkeys = Object.keys(long1[i]);
+    let mkeys = Object.keys(long1[i]); //sets variable mkeys to array of strings of the keynames inside long1[i] object in this case the day number that was pushed from the esp8266 to firebase
+    //gets the amount of data the graf should use
     dayAmount = 0;
     if (mkeys.length > dayAmount) {
       dayAmount = mkeys.length;
@@ -214,7 +205,9 @@ function monthdataGraphing(){
       dayAmount = currDate.getDate();
     }
   }
+  //--------
   for (var k = 0; k < dayAmount; k++) {
+    //adds data for the graf
     monthdata.addRows([
       [
         parseInt(days[k]),
@@ -228,6 +221,11 @@ function monthdataGraphing(){
   }
   moptions = {
     curveType: grafCurveType,
+    chartArea: {
+      left: "8%",
+      right: "8%",
+      width: "100%",
+    },
     hAxis: {
       title: "Day",
       gridlines: {
@@ -238,9 +236,6 @@ function monthdataGraphing(){
     vAxis: {
       title: "Temperature",
     },
-    // chartArea: {
-    //   left:100, top:100
-    // },
     legend: {
       position: "bottom",
     },
@@ -252,21 +247,20 @@ function monthdataGraphing(){
   drawnow();
   console.log(days);
 }
-
-function daydataGraphing(){
+//adds necessary data for day-graf to be drawn
+function daydataGraphing() {
   daydata = new google.visualization.DataTable();
   daydata.addColumn("string", "X");
-  daydata.addColumn("number", "rum1");
-  daydata.addColumn("number", "rum2");
-  daydata.addColumn("number", "rum3");
-  daydata.addColumn("number", "rum4");
-  daydata.addColumn("number", "rum5");
-
-  
+  daydata.addColumn("number", "Kabelrummet");
+  daydata.addColumn("number", "Kafeterian");
+  daydata.addColumn("number", "Pingisrummet");
+  daydata.addColumn("number", "Personalrummet");
+  daydata.addColumn("number", "Tekniklabbet");
 
   console.log("-----------------------------------------------------");
   for (const i in long) {
     let keys = Object.keys(long[i]);
+    //gets which is the current hour
     dateAmount = 0;
     if (keys.length > dateAmount) {
       dateAmount = keys.length;
@@ -279,7 +273,7 @@ function daydataGraphing(){
   for (var j = 23; j > dateAmount; j--) {
     daydata.addRows([
       [
-        String(hours[j]),
+        hours[j],
         long["rum1"][hours[j]]["temp"],
         long["rum2"][hours[j]]["temp"],
         long["rum3"][hours[j]]["temp"],
@@ -291,7 +285,7 @@ function daydataGraphing(){
   for (var k = 0; k <= dateAmount; k++) {
     daydata.addRows([
       [
-        String(hours[k]),
+        hours[k],
         long["rum1"][hours[k]]["temp"],
         long["rum2"][hours[k]]["temp"],
         long["rum3"][hours[k]]["temp"],
@@ -303,15 +297,18 @@ function daydataGraphing(){
 
   options = {
     curveType: grafCurveType,
+
+    chartArea: {
+      left: "8%",
+      right: "8%",
+      width: "100%",
+    },
     hAxis: {
       title: "Hour",
     },
     vAxis: {
       title: "Temperature",
     },
-    // chartArea: {
-    //   left:100, top:100
-    // },
     legend: {
       position: "bottom", //sets chart position
     },
@@ -323,16 +320,12 @@ function daydataGraphing(){
   drawnow();
   console.log(hours);
 }
+//changes variable that determines how the graf gets drawn(interpolated or non-interpolated)
+function interpolate() {
+  if (grafCurveType == "function") {
+    grafCurveType = "";
+  } else grafCurveType = "function";
 
-function interpolate()
-{
-    if(grafCurveType == "function")
-    {
-      grafCurveType = "";
-    }
-    else
-      grafCurveType = "function";
-
-    monthdataGraphing();
-    daydataGraphing();
+  monthdataGraphing();
+  daydataGraphing();
 }

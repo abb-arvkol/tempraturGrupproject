@@ -49,8 +49,6 @@ a:hover {
   
 }
 
-
-
 .values {
   background-color: white;
   height: 20vh;
@@ -114,14 +112,13 @@ p {
   margin-right: 2%;
   transform: translate(0px, 0px);
   transition: transform 4s linear, width 1s;
-
 }
 
 .con p {
     font-size: 24px;
     text-align: center;
     position: relative;
-    margin-left: 55%;
+    margin-left: 40%;
     margin-right: 55%;
     margin-top: -70%;
     color: rgb(250, 250, 250);
@@ -223,7 +220,7 @@ p {
 #checkboxContainer{
   position: absolute;
   top: 103vh;
-  left: 35vw;
+  left: 22vw;
   transform: translate(-50%,-50%);
   opacity: 0;
   transition: opacity 2s;
