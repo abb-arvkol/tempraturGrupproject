@@ -9,7 +9,7 @@ let rooms = ["Klassrummet",
              "Växthuset",
              "Pingisrummet",
              "Teknikrum",
-             "Sistrum"];
+             "Kabelrum"];
 let livesnap;
 let room = rooms[0];
 
