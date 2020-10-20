@@ -41,20 +41,25 @@ function updateLiveValue(rum, values) {
 
   console.log("hejeh" + rooms.indexOf(room)+1);
  
-  document.getElementById(`temp${rum}`).innerHTML = temperature + "C";
-  document.getElementById(`hum${rum}`).innerHTML = humidity + "%";
+  // document.getElementById(`temp${rum}`).innerHTML = temperature + "C";
+  // document.getElementById(`hum${rum}`).innerHTML = humidity + "%";
   
   if(rum == rooms.indexOf(room, 0)+1) {
     document.getElementById('current-temp').innerHTML = temperature + "C";
     document.getElementById('current-hum').innerHTML = humidity + "%";
+
+    document.getElementById('rum' + rum.toString()).innerHTML = temperature + "C";
   }
+  document.getElementById('rum' + rum.toString()).innerHTML = temperature + "C";
+  
 
 
 }
  
 database.ref("live/").on("value", snap => {
-  for(let i=1; i<6; i++) {
-    updateLiveValue(rooms.indexOf(room)+1, i); // change tha last parameter for decimals
+  livesnap = snap.val();
+  for(var i = 1; i < 6; i++){
+   updateLiveValue(i, livesnap); 
   }
 });
 
@@ -107,7 +112,7 @@ function newRoom() {
   let title = document.getElementById("title");
   console.log(room);
   if(title.innerHTML == room) return;
-  title.innerHTML = "snatch";
+  title.innerHTML = room;
 }
 
 window.addEventListener("load", pageFullyLoaded, true);
@@ -173,24 +178,19 @@ document.getElementById('check').onclick = function() {
 google.charts.load('current', {packages: ['corechart', 'line']});
 google.charts.setOnLoadCallback(drawCurveTypes);
 
-function drawCurveTypes() {
-      var daydata = new google.visualization.DataTable();
-      var monthdata = new google.visualization.DataTable();
-      daydata.addColumn('number', 'X');
-      daydata.addColumn('number', 'rum1');
-      daydata.addColumn('number', 'rum2');
-      daydata.addColumn('number', 'rum3');
-      //data.addColumn('number', 'rum4');
-      //data.addColumn('number', 'rum5');
+var daydata = new google.visualization.DataTable();
+var monthdata = new google.visualization.DataTable();
 
-      monthdata.addColumn('number', 'X');
-      monthdata.addColumn('number', 'rum1');
-      monthdata.addColumn('number', 'rum2');
-      monthdata.addColumn('number', 'rum3');
-      //monthdata.addColumn('number', 'rum4');
-      //monthdata.addColumn('number', 'rum5');
-      
+function drawCurveTypes() {
       database.ref("day/").on("value", snap => {
+        daydata = new google.visualization.DataTable();
+        daydata.addColumn('number', 'X');
+        daydata.addColumn('number', 'rum1');
+        daydata.addColumn('number', 'rum2');
+        daydata.addColumn('number', 'rum3');
+        daydata.addColumn('number', 'rum4');
+        daydata.addColumn('number', 'rum5');
+        
         long = snap.val();
 
          console.log("-----------------------------------------------------");
@@ -206,7 +206,7 @@ function drawCurveTypes() {
         }
         for(var k in hours)
         {
-          daydata.addRows([[parseInt(hours[k]), long["rum1"][hours[k]]["temp"],long["rum2"][hours[k]]["temp"],long["rum3"][hours[k]]["temp"]]]);
+          daydata.addRows([[parseInt(hours[k]), long["rum1"][hours[k]]["temp"],long["rum2"][hours[k]]["temp"],long["rum3"][hours[k]]["temp"],long["rum4"][hours[k]]["temp"],long["rum5"][hours[k]]["temp"]]]);
         }
         drawnow();
         console.log(hours);
@@ -239,6 +239,15 @@ function drawCurveTypes() {
 
 
       database.ref("mon/").on("value", snap => {
+
+        monthdata = new google.visualization.DataTable();
+        monthdata.addColumn('number', 'X');
+        monthdata.addColumn('number', 'rum1');
+        monthdata.addColumn('number', 'rum2');
+        monthdata.addColumn('number', 'rum3');
+        monthdata.addColumn('number', 'rum4');
+        monthdata.addColumn('number', 'rum5');
+
         long1 = snap.val();
 
         console.log("-----------------------------------------------------");
@@ -254,7 +263,7 @@ function drawCurveTypes() {
         }
         for(var k in days)
         {
-          monthdata.addRows([[parseInt(days[k]), long1["rum1"][days[k]]["temp"],long1["rum2"][days[k]]["temp"],long1["rum3"][days[k]]["temp"]]]);
+          monthdata.addRows([[parseInt(days[k]), long1["rum1"][days[k]]["temp"],long1["rum2"][days[k]]["temp"],long1["rum3"][days[k]]["temp"],long1["rum4"][days[k]]["temp"],long1["rum5"][days[k]]["temp"]]]);
         }
         moptions = {
           hAxis: {
