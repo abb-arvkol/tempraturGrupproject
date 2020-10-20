@@ -24,12 +24,9 @@ body {
   padding: 0;
   height: 70vh;
   width: 100vw;
-  background-image: url('mansion.jpg');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-attachment: fixed;
-  background-color: white;
-  backdrop-filter: blur(4px);
+}
+
+#top {
 }
 
 a {
@@ -97,7 +94,6 @@ p {
     padding: 0;
     height: 70vh;
     width: 120vw;
-    background-image: url('mansion.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
     background-attachment: fixed;
@@ -117,7 +113,7 @@ p {
 
 .con {
   display: inline-block;
-  margin-left: 5%;
+  margin-left: 2%;
   margin-right: 2%;
   transform: translate(0px, 0px);
   transition: transform 4s linear, width 1s;
@@ -191,6 +187,48 @@ p {
   top: 80vh;
   width: 30%;
   opacity: 0.2;
+}
+
+#bubble4 {
+  position: fixed;
+  right: 2vw;
+  top: 200vh;
+  width: 30%;
+  opacity: 0.05;
+}
+
+#bubble4:hover{
+  opacity: 0.3;
+}
+
+@media screen and (max-width: 1500px) {
+
+  #chart_div, #monthchart_div {
+    height: 600px;
+    width: 1000px;
+  }
+
+    .bubbles {
+        margin-left: 10%;
+    }
+
+    .con p {
+        font-size: 18px;
+    }
+
+    .bubbles {
+        width: 14vw;
+        margin-top: 5vh;
+    }
+    
+    
+    
+}
+
+@media screen and (max-width: 500px) {
+
+
+  
 }
 
 

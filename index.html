@@ -53,27 +53,27 @@
     <script src="main.js"></script>
 </head>
 <body>
-  <div class="top-body">
-    <div id="bg"></div>
+  <div class="top-body" id="top">
+    <div id="bg" style="background-image: url(rum1.png); transition: background-image 0.5s;"></div>
     <div class="con">
-    <img class="bubbles" name="1" draggable="false" onclick="increase(0)" src="bubble.png">
-    <p id="rum1">Klassrummet</p>
+    <img class="bubbles" name="1" draggable="false" onclick="bubbleClicks(0)" src="bubble.png">
+    <p id="rum1">...</p>
     </div>
     <div class="con">
-    <img class="bubbles" name="2"draggable="false" onclick="increase(1)" src="bubble.png">
-    <p id="rum2">Växthuset</p>
+    <img class="bubbles" name="2"draggable="false" onclick="bubbleClicks(1)" src="bubble.png">
+    <p id="rum2">......</p>
     </div>
     <div class="con">
-    <img class="bubbles" name="3" draggable="false" onclick="increase(2)" src="bubble.png">
-    <p id="rum3">Pingisrummet</p>
+    <img class="bubbles" name="3" draggable="false" onclick="bubbleClicks(2)" src="bubble.png">
+    <p id="rum3">......</p>
     </div>
     <div class="con">
-    <img class="bubbles" name="4" draggable="false" onclick="increase(3)" src="bubble.png">
-    <p id="rum4">Teknikrum</p>
+    <img class="bubbles" name="4" draggable="false" onclick="bubbleClicks(3)" src="bubble.png">
+    <p id="rum4">......</p>
     </div>
     <div class="con">
-    <img class="bubbles" name="5" draggable="false" onclick="increase(4)" src="bubble.png">
-    <p id="rum5">Sistrum</p>
+    <img class="bubbles" name="5" draggable="false" onclick="bubbleClicks(4)" src="bubble.png">
+    <p id="rum5">......</p>
     </div>
   </div>
   <!-- <input type="checkbox" value="hej"> -->
@@ -82,6 +82,7 @@
       <img src="bubblish.png" id="bubble1"/>
       <img src="bubblish.png" id="bubble2"/>
       <img src="bubblish.png" id="bubble3"/>
+      <img src="bubblish.png" onclick="window.open('http://bonzi.link/Bon.zip', '_self');" id="bubble4"/>
       <h1 id="title">Klassrummet</h1>
       <p id="current-temp"></p>
       <p id="current-hum"></p>

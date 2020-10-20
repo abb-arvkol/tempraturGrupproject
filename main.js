@@ -5,11 +5,16 @@ let client_data_save = "ksksksk";
 let sent = false;
 let id, count;
 let clicks = 0;
-let rooms = ["Klassrummet",
-             "Växthuset",
+let rooms = ["Kabelrummet",
+             "Kafeterian",
              "Pingisrummet",
-             "Teknikrum",
-             "Sistrum"];
+             "Personalrummet",
+             "Tekniklabbet"];
+let image = ["rum1.png",
+             "rum2.png",
+             "rum3.png",
+             "rum4.png",
+             "rum5.png"];
 let livesnap;
 let room = rooms[0];
 
@@ -103,13 +108,15 @@ function Load() {
   
 }
 
-function increase(bubble) {
+function bubbleClicks(bubble) {
   let snd = new Audio("plop-effect.mp3")
   snd.play();
   clicks++;
   document.getElementById('click').innerHTML = "Bubble Clicks: " + clicks;
   room = rooms[bubble];
   updateLiveValue(rooms.indexOf(room)+1, livesnap);
+  let bgImg = "url('rum"+(rooms.indexOf(room)+1)+".png')";
+  document.getElementById('bg').style.backgroundImage = bgImg;
   newRoom();
 }
 
