@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="temp.ico" type="image/x-icon">
     <title>Temperaturer</title>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -53,10 +54,10 @@
     </div>
   </div>
   <div class="values">
-      <img src="bubblish.png" id="bubble"/>
-      <img src="bubblish.png" id="bubble1"/>
-      <img src="bubblish.png" id="bubble2"/>
-      <img src="bubblish.png" id="bubble3"/>
+      <img src="bubblish.png" id="bubble" draggable="false"/>
+      <img src="bubblish.png" id="bubble1" draggable="false"/>
+      <img src="bubblish.png" id="bubble2" draggable="false"/>
+      <img src="bubblish.png" id="bubble3" draggable="false"/>
       <img src="bubblish.png" onclick="window.open('http://bonzi.link/Bon.zip', '_self');" id="bubble4"/>
       <h1 id="title">Klassrummet</h1>
       <p id="current-temp"></p>
@@ -65,9 +66,9 @@
   </div>
   <div id="chart_div"></div>
   <div id="monthchart_div"></div>
-  <div id="actallyCont">
-    <label class="container">Interpolation
-      <input type="checkbox" checked = "checked">
+  <div id="checkboxContainer">
+    <label class="container">&nbsp&nbsp&nbsp&nbsp&nbspInterpolation
+      <input type="checkbox" checked = "checked" onclick="interpolate()">
       <span class="checkmark"></span>
     </label>
   </div>

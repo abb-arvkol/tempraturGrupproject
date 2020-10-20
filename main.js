@@ -23,6 +23,8 @@ let long, long1;
 let dayAmount = 0,
   dateAmount = 0;
 
+let grafCurveType = "function"
+
 var currDate = new Date();
 
 window.onload = Load;
@@ -114,6 +116,7 @@ function pageFullyLoaded() {
       document.getElementById("current-hum").style.opacity = "1";
       document.getElementById("click").style.opacity = "1";
       if (scroll > 300) {
+        document.getElementById("checkboxContainer").style.opacity = "1";
         let chart = document.getElementById("chart_div");
         chart.style.opacity = "1";
         chart.style.transform = "translateX(30px)";
@@ -165,148 +168,171 @@ try {
 } catch {}
 function drawCurveTypes() {
   database.ref("day/").on("value", (snap) => {
-    daydata = new google.visualization.DataTable();
-    daydata.addColumn("string", "X");
-    daydata.addColumn("number", "rum1");
-    daydata.addColumn("number", "rum2");
-    daydata.addColumn("number", "rum3");
-    daydata.addColumn("number", "rum4");
-    daydata.addColumn("number", "rum5");
-
     long = snap.val();
 
-    console.log("-----------------------------------------------------");
-    for (const i in long) {
-      let keys = Object.keys(long[i]);
-      dateAmount = 0;
-      if (keys.length > dateAmount) {
-        dateAmount = keys.length;
-        hours = keys;
-      }
-      if (keys.length > currDate.getHours()) {
-        dateAmount = currDate.getHours(); //getHours returns hour value from 0-23
-      }
-    }
-    for (var j = 23; j > dateAmount; j--) {
-      daydata.addRows([
-        [
-          String(hours[j]),
-          long["rum1"][hours[j]]["temp"],
-          long["rum2"][hours[j]]["temp"],
-          long["rum3"][hours[j]]["temp"],
-          long["rum4"][hours[j]]["temp"],
-          long["rum5"][hours[j]]["temp"],
-        ],
-      ]);
-    }
-    for (var k = 0; k <= dateAmount; k++) {
-      daydata.addRows([
-        [
-          String(hours[k]),
-          long["rum1"][hours[k]]["temp"],
-          long["rum2"][hours[k]]["temp"],
-          long["rum3"][hours[k]]["temp"],
-          long["rum4"][hours[k]]["temp"],
-          long["rum5"][hours[k]]["temp"],
-        ],
-      ]);
-    }
-
-    options = {
-      curveType: "function",
-      hAxis: {
-        title: "Hour",
-        //gridlines:{count: 24},
-      },
-      vAxis: {
-        title: "Temperature",
-      },
-      // chartArea: {
-      //   left:100, top:100
-      // },
-      legend: {
-        position: "bottom", //sets chart position
-      },
-      backgroundColor: {
-        fill: "transparent",
-      },
-    };
-
-    drawnow();
-    console.log(hours);
+    daydataGraphing();
   });
 
   database.ref("mon/").on("value", (snap) => {
-    monthdata = new google.visualization.DataTable();
-    monthdata.addColumn("number", "X");
-    monthdata.addColumn("number", "rum1");
-    monthdata.addColumn("number", "rum2");
-    monthdata.addColumn("number", "rum3");
-    monthdata.addColumn("number", "rum4");
-    monthdata.addColumn("number", "rum5");
-
     long1 = snap.val();
-
-    console.log("-----------------------------------------------------");
-
-    for (const i in long1) {
-      let mkeys = Object.keys(long1[i]);
-      dayAmount = 0;
-      if (mkeys.length > dayAmount) {
-        dayAmount = mkeys.length;
-        days = mkeys;
-      }
-      if (mkeys.length > currDate.getDate()) {
-        dayAmount = currDate.getDate();
-      }
-    }
-    for (var k = 0; k < dayAmount; k++) {
-      monthdata.addRows([
-        [
-          parseInt(days[k]),
-          long1["rum1"][days[k]]["temp"],
-          long1["rum2"][days[k]]["temp"],
-          long1["rum3"][days[k]]["temp"],
-          long1["rum4"][days[k]]["temp"],
-          long1["rum5"][days[k]]["temp"],
-        ],
-      ]);
-    }
-    moptions = {
-      curveType: "function",
-      hAxis: {
-        title: "Day",
-        gridlines: {
-          count: dayAmount,
-          color: "transparent",
-        },
-      },
-      vAxis: {
-        title: "Temperature",
-      },
-      // chartArea: {
-      //   left:100, top:100
-      // },
-      legend: {
-        position: "bottom",
-      },
-      backgroundColor: {
-        fill: "transparent",
-      },
-    };
-
-    drawnow();
-    console.log(days);
+    monthdataGraphing();
   });
 
-  var chart = new google.visualization.LineChart(
+  chart = new google.visualization.LineChart(
     document.getElementById("chart_div")
   );
-  var monthchart = new google.visualization.LineChart(
+  monthchart = new google.visualization.LineChart(
     document.getElementById("monthchart_div")
   );
-  function drawnow() {
-    chart.draw(daydata, options);
-    monthchart.draw(monthdata, moptions);
+  
+}
+
+function drawnow() {
+  chart.draw(daydata, options);
+  monthchart.draw(monthdata, moptions);
+}
+
+function monthdataGraphing(){
+  monthdata = new google.visualization.DataTable();
+  monthdata.addColumn("number", "X");
+  monthdata.addColumn("number", "rum1");
+  monthdata.addColumn("number", "rum2");
+  monthdata.addColumn("number", "rum3");
+  monthdata.addColumn("number", "rum4");
+  monthdata.addColumn("number", "rum5");
+
+  console.log("-----------------------------------------------------");
+
+  for (const i in long1) {
+    let mkeys = Object.keys(long1[i]);
+    dayAmount = 0;
+    if (mkeys.length > dayAmount) {
+      dayAmount = mkeys.length;
+      days = mkeys;
+    }
+    if (mkeys.length > currDate.getDate()) {
+      dayAmount = currDate.getDate();
+    }
   }
+  for (var k = 0; k < dayAmount; k++) {
+    monthdata.addRows([
+      [
+        parseInt(days[k]),
+        long1["rum1"][days[k]]["temp"],
+        long1["rum2"][days[k]]["temp"],
+        long1["rum3"][days[k]]["temp"],
+        long1["rum4"][days[k]]["temp"],
+        long1["rum5"][days[k]]["temp"],
+      ],
+    ]);
+  }
+  moptions = {
+    curveType: grafCurveType,
+    hAxis: {
+      title: "Day",
+      gridlines: {
+        count: dayAmount,
+        color: "transparent",
+      },
+    },
+    vAxis: {
+      title: "Temperature",
+    },
+    // chartArea: {
+    //   left:100, top:100
+    // },
+    legend: {
+      position: "bottom",
+    },
+    backgroundColor: {
+      fill: "transparent",
+    },
+  };
+
+  drawnow();
+  console.log(days);
+}
+
+function daydataGraphing(){
+  daydata = new google.visualization.DataTable();
+  daydata.addColumn("string", "X");
+  daydata.addColumn("number", "rum1");
+  daydata.addColumn("number", "rum2");
+  daydata.addColumn("number", "rum3");
+  daydata.addColumn("number", "rum4");
+  daydata.addColumn("number", "rum5");
+
+  
+
+  console.log("-----------------------------------------------------");
+  for (const i in long) {
+    let keys = Object.keys(long[i]);
+    dateAmount = 0;
+    if (keys.length > dateAmount) {
+      dateAmount = keys.length;
+      hours = keys;
+    }
+    if (keys.length > currDate.getHours()) {
+      dateAmount = currDate.getHours(); //getHours returns hour value from 0-23
+    }
+  }
+  for (var j = 23; j > dateAmount; j--) {
+    daydata.addRows([
+      [
+        String(hours[j]),
+        long["rum1"][hours[j]]["temp"],
+        long["rum2"][hours[j]]["temp"],
+        long["rum3"][hours[j]]["temp"],
+        long["rum4"][hours[j]]["temp"],
+        long["rum5"][hours[j]]["temp"],
+      ],
+    ]);
+  }
+  for (var k = 0; k <= dateAmount; k++) {
+    daydata.addRows([
+      [
+        String(hours[k]),
+        long["rum1"][hours[k]]["temp"],
+        long["rum2"][hours[k]]["temp"],
+        long["rum3"][hours[k]]["temp"],
+        long["rum4"][hours[k]]["temp"],
+        long["rum5"][hours[k]]["temp"],
+      ],
+    ]);
+  }
+
+  options = {
+    curveType: grafCurveType,
+    hAxis: {
+      title: "Hour",
+    },
+    vAxis: {
+      title: "Temperature",
+    },
+    // chartArea: {
+    //   left:100, top:100
+    // },
+    legend: {
+      position: "bottom", //sets chart position
+    },
+    backgroundColor: {
+      fill: "transparent",
+    },
+  };
+
+  drawnow();
+  console.log(hours);
+}
+
+function interpolate()
+{
+    if(grafCurveType == "function")
+    {
+      grafCurveType = "";
+    }
+    else
+      grafCurveType = "function";
+
+    monthdataGraphing();
+    daydataGraphing();
 }
