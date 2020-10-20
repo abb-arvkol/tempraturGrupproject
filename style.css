@@ -24,12 +24,9 @@ body {
   padding: 0;
   height: 70vh;
   width: 100vw;
-  background-image: url('mansion.jpg');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-attachment: fixed;
-  background-color: white;
-  backdrop-filter: blur(4px);
+}
+
+#top {
 }
 
 a {
@@ -97,7 +94,6 @@ p {
     padding: 0;
     height: 70vh;
     width: 120vw;
-    background-image: url('mansion.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
     background-attachment: fixed;
@@ -117,7 +113,7 @@ p {
 
 .con {
   display: inline-block;
-  margin-left: 5%;
+  margin-left: 2%;
   margin-right: 2%;
   transform: translate(0px, 0px);
   transition: transform 4s linear, width 1s;
@@ -191,6 +187,114 @@ p {
   top: 80vh;
   width: 30%;
   opacity: 0.2;
+}
+
+#bubble4 {
+  position: fixed;
+  right: 2vw;
+  top: 200vh;
+  width: 30%;
+  opacity: 0.05;
+}
+
+#bubble4:hover{
+  opacity: 0.3;
+}
+
+@media screen and (max-width: 1500px) {
+
+  #chart_div, #monthchart_div {
+    height: 600px;
+    width: 1000px;
+  }
+
+    .bubbles {
+        margin-left: 10%;
+    }
+
+    .con p {
+        font-size: 18px;
+    }
+
+    .bubbles {
+        width: 14vw;
+        margin-top: 5vh;
+    }
+    
+    /*custom checkbox*/
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 4vmin;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5vmin;
+  width: 5vmin;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  top: 2vmin;
+  left: 2vmin;
+  width: 2vmin;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+    
+}
+
+
+@media screen and (max-width: 500px) {
+
+
+  
 }
 
 
