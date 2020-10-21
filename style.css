@@ -11,7 +11,7 @@ body {
        -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently*/
-            -o-user-select: none;
+         -o-user-select: none;
     background-color:white;
     margin: 0px;
     padding: 0px;
@@ -113,16 +113,29 @@ p {
   transform: translate(0px, 0px);
   transition: transform 4s linear, width 1s;
 }
-
-.con p {
+@media screen and (max-width: 1500px) {
+  .con p {
+      font-size: 24px;
+      text-align: center;
+      position: relative;
+      margin-left: 40%;
+      margin-right: 55%;
+      margin-top: -70%;
+      color: rgb(250, 250, 250);
+      text-shadow: 1px 1px 1px gray;
+  }
+}
+@media screen and (min-width: 1500px) {
+  .con p {
     font-size: 24px;
     text-align: center;
     position: relative;
-    margin-left: 40%;
+    margin-left: 55%;
     margin-right: 55%;
     margin-top: -70%;
     color: rgb(250, 250, 250);
     text-shadow: 1px 1px 1px gray;
+  }
 }
 
 .bubbles-container {
@@ -216,18 +229,31 @@ p {
     }
   }
 /*custom checkbox*/
-
-#checkboxContainer{
-  position: absolute;
-  top: 103vh;
-  left: 22vw;
-  transform: translate(-50%,-50%);
-  opacity: 0;
-  transition: opacity 2s;
+@media screen and (max-width: 1500px) {
+  #checkboxContainer{
+    position: absolute;
+    top: 103vh;
+    left: 22vw;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    transition: opacity 2s;
+  }
+}
+@media screen and (min-width: 1500px) {
+  #checkboxContainer{
+    position: absolute;
+    top: 100vh;
+    left: 28vw;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    transition: opacity 2s;
+  }
 }
 
 .container {
+  margin-left: 22%;
   cursor: pointer;
+  font-family: 'Numans', sans-serif;
   font-size: 4vmin;
   -webkit-user-select: none;
   -moz-user-select: none;
