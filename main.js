@@ -270,6 +270,7 @@ function daydataGraphing() {
       dateAmount = currDate.getHours(); //getHours returns hour value from 0-23
     }
   }
+  //puts the hour values that has not passed at the right location of the horizontal axis(for exampel if the current hour is 22 then the first x label will be 23 as that hour has not accured yet during the day and then the labels will follow from 0 to 22)
   for (var j = 23; j > dateAmount; j--) {
     daydata.addRows([
       [
