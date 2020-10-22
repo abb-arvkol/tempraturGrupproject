@@ -80,9 +80,10 @@ function Load() {
   });
 }
 
+//function for when the room selection bubbles gets clicked 
 function bubbleClicks(bubble) {
-  let snd = new Audio("plop-effect.mp3");
-  snd.play();
+  let snd = new Audio("plop-effect.mp3");//creates audio object
+  snd.play();//plays audio object
   clicks++;
   document.getElementById("click").innerHTML = "Bubble Clicks: " + clicks;
   room = rooms[bubble];
@@ -99,7 +100,7 @@ function newRoom() {
   title.innerHTML = room;
 }
 
-window.addEventListener("load", pageFullyLoaded, true);
+window.addEventListener("load", pageFullyLoaded, true);//adds eventListener that calls pageFullyLoaded function when the page has loaded 
 
 function pageFullyLoaded() {
   window.addEventListener("scroll", (event) => {
