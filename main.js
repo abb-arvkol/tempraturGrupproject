@@ -55,12 +55,12 @@ function updateLiveValue(rum, values) {
   // document.getElementById(`hum${rum}`).innerHTML = humidity + "%";
   
   if(rum == rooms.indexOf(room, 0)+1) {
-    document.getElementById('current-temp').innerHTML = temperature + "C";
+    document.getElementById('current-temp').innerHTML = temperature + "°C";
     document.getElementById('current-hum').innerHTML = humidity + "%";
 
-    document.getElementById('rum' + rum.toString()).innerHTML = temperature + "C";
+    document.getElementById('rum' + rum.toString()).innerHTML = temperature + "°C";
   }
-  document.getElementById('rum' + rum.toString()).innerHTML = temperature + "C";
+  document.getElementById('rum' + rum.toString()).innerHTML = temperature + "°C";
   
 
 
