@@ -47,7 +47,7 @@ function updateLiveValue(rum, values) {
     document.getElementById("current-hum").innerHTML = humidity + "%";
   }
   document.getElementById("rum" + rum.toString()).innerHTML =
-    temperature + "°C";
+  temperature + "°C";
 }
 //listens to the database for value chcanges within the live node (which contains the live valuse of each room)
 //once a value is updated, it will loop through 1 to 5 sending both the iteration index and the values that have been
